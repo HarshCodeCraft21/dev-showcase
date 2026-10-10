@@ -1,24 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowUpRight, ArrowRight, Code2, Database, Braces, Layers, Globe, Terminal } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ProjectCatalog } from '@/components/portfolio/project-catalog';
+import { pageHead, services } from '@/lib/portfolio';
+export const Route = createFileRoute('/')({head:()=>pageHead('Full-stack developer & digital craftsman','Thoughtful web applications, e-commerce experiences, and SaaS products. Freelance full-stack development by Byteworks.'),component:Index});
+function Index(){return <div className="site-container reveal"><section className="hero"><div className="mb-7 flex flex-wrap items-center justify-between gap-4"><span className="eyebrow text-muted-foreground">INDEPENDENT DEVELOPER. END-TO-END THINKER.</span><Link to="/contact" className="availability"><span className="status-dot"/>Let’s discuss your next project <ArrowUpRight className="size-3"/></Link></div><h1>Full-stack developer.<br/>Thoughtful digital <span className="relative isolate inline-block">craft.<span className="absolute bottom-0 left-0 -z-10 h-3 w-full bg-lime"/></span></h1><div className="mt-6 grid gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"><div><p className="max-w-xl text-sm leading-7 text-muted-foreground">I turn ideas into intuitive, reliable web experiences.<br className="hidden sm:block"/>From the first pixel to the final API — built with care, built to last.</p><div className="mt-6 flex flex-wrap gap-3"><Button asChild className="h-11 px-5 text-xs"><Link to="/work">Explore my work <ArrowUpRight/></Link></Button><Button asChild variant="outline" className="h-11 px-5 text-xs"><Link to="/contact">Let’s build something <ArrowRight/></Link></Button></div></div><div className="mb-1 border-l border-border pl-4 text-xs leading-6 text-muted-foreground">Your idea. My expertise.<br/><span className="text-foreground">One complete solution.</span></div></div></section>
+<div className="mb-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-y border-border py-5"><span className="eyebrow mr-2 text-[9px] text-muted-foreground">MY EVERYDAY TOOLKIT</span>{[{name:'React',icon:Code2},{name:'Next.js',icon:Globe},{name:'TypeScript',icon:Braces},{name:'Node.js',icon:Layers},{name:'PostgreSQL',icon:Database},{name:'Python',icon:Terminal}].map(({name,icon:Icon})=><span className="flex items-center gap-2 text-xs font-medium text-muted-foreground" key={name}><Icon className="size-4"/>{name}</span>)}</div><ProjectCatalog home/>
+<section className="mt-14 border-t border-border pt-10"><div className="mb-8 grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"><div><div className="eyebrow mb-2 text-muted-foreground">FROM IDEA TO LAUNCH</div><h2 className="section-heading">A partner for the whole journey.</h2></div><Link to="/services" className="flex gap-2 items-center text-xs">Explore my services <ArrowUpRight className="size-4"/></Link></div>{services.slice(0,3).map((s,i)=><Link to="/services" key={s.name} className="service-row"><span className="text-xs text-muted-foreground">0{i+1}</span><h3 className="text-lg font-semibold">{s.name}</h3><p className="text-sm text-muted-foreground leading-6">{s.text}</p><ArrowUpRight className="size-5"/></Link>)}</section></div>;}
